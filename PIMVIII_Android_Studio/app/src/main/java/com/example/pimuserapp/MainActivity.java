@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView; // Importante!
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 import retrofit2.Call;
@@ -30,37 +30,30 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Configura a UI do sistema (padrão do Android novo)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.recyclerViewPlaylists), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // 1. Configurar o RecyclerView
         recyclerView = findViewById(R.id.recyclerViewPlaylists);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // 2. Configurar Retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5207/") // CONFIRA A PORTA DA SUA API!
+                .baseUrl("http://10.0.2.2:5207/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ApiService service = retrofit.create(ApiService.class);
 
-        // 3. Buscar os dados
         service.getPlaylists().enqueue(new Callback<List<Playlist>>() {
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Playlist> playlists = response.body();
 
-                    // 4. Ligar o Adapter (O Capataz)
                     adapter = new PlaylistAdapter(playlists, playlist -> {
-                        // Ação do Clique: Ir para Detalhes
                         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                        // Passa os dados pra outra tela (dependendo do nome no seu Model)
                         intent.putExtra("EXTRA_TITLE", playlist.title);
                         intent.putExtra("EXTRA_DESC", playlist.description);
 

@@ -1,6 +1,6 @@
 package com.example.pimuserapp;
 
-import java.util.List; // <--- ESSE IMPORT É CRUCIAL!
+import java.util.List;
 
 public class Playlist {
     public int id;
