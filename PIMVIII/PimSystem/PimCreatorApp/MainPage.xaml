@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PimCreatorApp.MainPage"
+             BackgroundColor="#1c1c1c">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="150"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="ACESSO AO SISTEMA"
+                TextColor="White"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="15">
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Digite seu e-mail"
+                       PlaceholderColor="#999999"
+                       TextColor="White"
+                       Keyboard="Email"
+                       BackgroundColor="#333333" />
+
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Digite sua senha"
+                       PlaceholderColor="#999999"
+                       TextColor="White"
+                       IsPassword="True"
+                       BackgroundColor="#333333" />
+            </VerticalStackLayout>
+
+            <Button
+                x:Name="LoginBtn"
+                Text="ENTRAR"
+                FontAttributes="Bold"
+                BackgroundColor="#512BD4"
+                TextColor="White"
+                HeightRequest="50"
+                CornerRadius="10"
+                Clicked="OnLoginClicked" />
+
+            <ActivityIndicator x:Name="LoadingSpinner"
+                               IsRunning="False"
+                               Color="#512BD4"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

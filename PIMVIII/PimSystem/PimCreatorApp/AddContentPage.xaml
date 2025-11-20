@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PimCreatorApp.AddContentPage"
+             Title="Adicionar Conteúdo"
+             BackgroundColor="#1c1c1c">
+
+    <VerticalStackLayout Spacing="20" Padding="30">
+        <Label Text="Novo Conteúdo" FontSize="24" TextColor="White" FontAttributes="Bold"/>
+
+        <Label x:Name="PlaylistLabel" Text="Playlist: ..." TextColor="Gray"/>
+
+        <Entry x:Name="TitleEntry" Placeholder="Título (ex: Música Boa)" 
+               TextColor="White" PlaceholderColor="Gray" BackgroundColor="#333333"/>
+
+        <Picker x:Name="TypePicker" Title="Tipo de Conteúdo" TextColor="White" BackgroundColor="#333333">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Musica</x:String>
+                    <x:String>Video</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+            <Picker.SelectedIndex>0</Picker.SelectedIndex>
+        </Picker>
+
+        <Entry x:Name="UrlEntry" Placeholder="Link (URL)" Text="http://music.com/song.mp3"
+               TextColor="White" PlaceholderColor="Gray" BackgroundColor="#333333"/>
+
+        <Button Text="FAZER UPLOAD" BackgroundColor="#512BD4" TextColor="White" 
+                HeightRequest="50" CornerRadius="10" Clicked="OnUploadClicked"/>
+        
+        <ActivityIndicator x:Name="LoadingSpinner" IsRunning="False" Color="#512BD4"/>
+    </VerticalStackLayout>
+</ContentPage>

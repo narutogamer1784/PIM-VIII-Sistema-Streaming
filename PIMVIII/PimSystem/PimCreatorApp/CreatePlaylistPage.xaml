@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PimCreatorApp.CreatePlaylistPage"
+             Title="Nova Playlist"
+             BackgroundColor="#1c1c1c">
+
+    <VerticalStackLayout Spacing="20" Padding="30">
+        <Label Text="Criar Nova Playlist" FontSize="24" TextColor="White" FontAttributes="Bold"/>
+
+        <Entry x:Name="NameEntry" Placeholder="Nome da Playlist (ex: Modão Sertanejo)" 
+               TextColor="White" PlaceholderColor="Gray" BackgroundColor="#333333"/>
+
+        <Editor x:Name="DescEntry" Placeholder="Descrição..." 
+                TextColor="White" PlaceholderColor="Gray" BackgroundColor="#333333" HeightRequest="100"/>
+
+        <Button Text="SALVAR PLAYLIST" BackgroundColor="#512BD4" TextColor="White" 
+                HeightRequest="50" CornerRadius="10" Clicked="OnSaveClicked"/>
+        
+        <ActivityIndicator x:Name="LoadingSpinner" IsRunning="False" Color="#512BD4"/>
+    </VerticalStackLayout>
+</ContentPage>

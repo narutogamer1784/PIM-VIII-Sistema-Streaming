@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PimCreatorApp.DashboardPage"
+             Title="Painel do Criador"
+             BackgroundColor="#1c1c1c">
+
+    <Grid RowDefinitions="Auto, *">
+        <StackLayout Grid.Row="0" Padding="20" BackgroundColor="#333333">
+            <Label Text="Minhas Playlists" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   TextColor="White"/>
+            <Label Text="Gerencie seu conteúdo multimídia aqui" 
+                   FontSize="14" 
+                   TextColor="#CCCCCC"/>
+        </StackLayout>
+
+        <ScrollView Grid.Row="1" Padding="20">
+            <VerticalStackLayout Spacing="15" x:Name="PlaylistsStack">
+                
+                <Button Text="+ Nova Playlist"
+                        BackgroundColor="#512BD4"
+                        TextColor="White"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        FontAttributes="Bold"
+                        Clicked="OnNewPlaylistClicked"/>
+
+                <Label Text="Carregando suas playlists..." 
+                       x:Name="StatusLabel"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"
+                       IsVisible="False"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

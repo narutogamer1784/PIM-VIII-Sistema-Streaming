@@ -1,0 +1,24 @@
+# --- GERAL ---
+.DS_Store
+Thumbs.db
+
+# --- VS CODE / C# (Pasta PIMVIII) ---
+[Bb]in/
+[Oo]bj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
+
+# --- ANDROID STUDIO (Pasta PIMVIII_Android_Studio) ---
+*.iml
+.gradle
+/local.properties
+/.idea
+/build
+/captures
+.externalNativeBuild
+.cxx

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PimCreatorApp/PimCreatorApp.csproj" />
+  <Project Path="PimAPI/PimAPI.csproj" />
+</Solution>

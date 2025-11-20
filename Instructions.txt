@@ -1,0 +1,196 @@
+2. INFORMAÇÕES ESPECÍFICAS SOBRE O PIM
+PIM VIII
+
+TEMA: Sistema de streaming de conteúdo multimídia.
+
+----------------------------------------------------------------------
+2.1 OBJETIVO GERAL
+----------------------------------------------------------------------
+Com base no conteúdo das disciplinas Programação Orientada a Objetos II, Desenvolvimento de Software para a Internet e Tópicos Especiais de Programação Orientada a Objetos, o aluno ou grupo do PIM deverá apresentar a codificação em C# do mecanismo de acesso a um trecho de banco de dados como uma Web API, assim como os protótipos de interface gráfica com o usuário utilizando .NET MAUI para a interface do criador de conteúdos e Java para o aplicativo mobile voltado ao usuário final em um sistema de streaming de conteúdo multimídia.
+
+Esse sistema tem como propósito facilitar o acesso e a distribuição de diversos tipos de conteúdo audiovisual, proporcionando uma plataforma virtual onde criadores de conteúdo podem disponibilizar seus vídeos, músicas e podcasts, e os usuários podem acessá-los de forma rápida e prática.
+
+----------------------------------------------------------------------
+2.2 OBJETIVOS ESPECÍFICOS
+----------------------------------------------------------------------
+- Desenvolver e aplicar os conhecimentos adquiridos nas disciplinas Programação Orientada a Objetos II, Desenvolvimento de Software para a Internet e Tópicos Especiais de Programação Orientada a Objetos.
+- Fomentar o hábito de executar atividades envolvendo múltiplas disciplinas.
+- Desenvolver a capacidade de identificar necessidades e propor soluções técnicas.
+- Elencar, argumentar e justificar metodologias referentes à prototipação e à codificação de sistemas de computação.
+- Aplicar as normas da ABNT para a produção de trabalhos acadêmicos.
+
+----------------------------------------------------------------------
+2.3 CONTEXTUALIZAÇÃO DO CASO
+----------------------------------------------------------------------
+Como membro de uma empresa de desenvolvimento de software, sua equipe foi encarregada de desenvolver funcionalidades-chave para um sistema de streaming de conteúdo multimídia em andamento. Vocês serão responsáveis por:
+
+- Implementar uma Web API robusta utilizando C# e Entity Framework, que não só manipulará operações CRUD, mas também incorporará medidas de segurança como autenticação e autorização. A API deve gerenciar acessos a dados específicos do banco e facilitar a comunicação entre o banco de dados e o front-end. A utilização da classe PlaylistRepository com métodos de instância é crucial para manter a conexão e o estado do banco de dados.
+
+- Adicionalmente, vocês desenvolverão um protótipo de interface gráfica usando .NET MAUI, que será responsável por oferecer todas as funcionalidades voltadas aos criadores de conteúdo, como upload, gestão de playlists e análise de desempenho. Essa interface deve ser responsiva e simular interações com a API de maneira eficaz e realista em ambientes Windows. Para os usuários finais, a equipe deverá desenvolver um aplicativo para Android usando Java, focado na navegação e consumo de conteúdo, bem como na interação social dentro da plataforma.
+
+[SOBRE O MODELO DE DADOS - DER]
+O modelo do segmento do banco de dados que será usado pela equipe está representado pelo Diagrama Entidade-Relacionamento (DER - Figura 1).
+
+DESCRIÇÃO TÉCNICA DAS FIGURAS (PARA REFERÊNCIA)
+
+FIGURA 1 – DESCRIÇÃO DO DER (DIAGRAMA ENTIDADE-RELACIONAMENTO)
+
+O diagrama apresenta a estrutura do banco de dados relacional composta por 5 tabelas. Abaixo, a descrição dos campos e chaves de cada tabela:
+
+1. Tabela: Usuario
+
+    ID (PK): int (Chave Primária)
+
+    Nome: varchar
+
+    Email: varchar
+
+    Relacionamento: Um usuário pode ter várias Playlists (1:N).
+
+2. Tabela: Playlist
+
+    ID (PK): int (Chave Primária)
+
+    Nome: varchar
+
+    UsuarioID (FK): int (Chave Estrangeira ligada à tabela Usuario)
+
+    Relacionamento: Pertence a um Usuario. Possui muitos itens via tabela associativa ItemPlaylist.
+
+3. Tabela: Conteudo
+
+    ID (PK): int (Chave Primária)
+
+    Titulo: varchar
+
+    [Tipo]: varchar (Nota: Na imagem original consta um erro de digitação onde o nome da coluna aparece como "varchar", mas refere-se ao atributo "Tipo" do diagrama de classes)
+
+    CriadorID (FK): int (Chave Estrangeira ligada à tabela Criador)
+
+    Relacionamento: Pertence a um Criador. Está contido em muitas Playlists via tabela ItemPlaylist.
+
+4. Tabela: Criador
+
+    ID (PK): int (Chave Primária)
+
+    Nome: varchar
+
+    Relacionamento: Um criador pode ter vários Conteúdos associados.
+
+5. Tabela: ItemPlaylist (Tabela Associativa)
+
+    PlaylistID (FK): int
+
+    ConteudoID (FK): int
+
+    Função: Resolve o relacionamento de muitos-para-muitos entre Playlist e Conteudo.
+
+No sistema de streaming de conteúdo multimídia, a entidade Usuário é fundamental, pois representa os indivíduos que utilizam o sistema, armazenando informações vitais, como identificação única, nome e e-mail. A entidade Playlist está diretamente relacionada ao usuário e serve como uma coleção de conteúdos, cada uma identificada por um ID próprio e vinculada ao usuário que a criou por meio de uma chave estrangeira.
+
+Por sua vez, a entidade Conteúdo abrange os detalhes dos itens disponíveis para acesso no sistema, como vídeos, músicas e podcasts, incluindo atributos como ID, título, tipo e uma referência ao criador do conteúdo. A entidade Criador descreve os responsáveis pela criação do conteúdo, sejam eles artistas ou produtores, fornecendo uma identificação e nome. Por fim, a entidade ItemPlaylist funciona como uma tabela associativa que liga playlists a conteúdos, indicando quais conteúdos específicos fazem parte de cada playlist, essencial para a organização e manipulação dos dados dentro do sistema.
+
+[SOBRE AS CLASSES]
+No contexto do desenvolvimento de software para o sistema proposto (Diagrama de Classes - Figura 2):
+
+FIGURA 2 – DESCRIÇÃO DO DIAGRAMA DE CLASSES
+
+O diagrama apresenta a modelagem das classes para a aplicação orientada a objetos, exibindo atributos, métodos e associações.
+
+1. Classe: Usuario
+
+    Atributos:
+
+        + int ID
+
+        + string Nome
+
+        + string Email
+
+        + List<Playlist> Playlists
+
+    Associação: 1 Usuário possui * (várias) Playlists.
+
+2. Classe: Playlist
+
+    Atributos:
+
+        + int ID
+
+        + string Nome
+
+        + Usuario Usuario
+
+        + List<Conteudo> Conteudos
+
+    Associação: * 1 Playlist pertence a 1 Usuario.
+
+        1 Playlist contém * (vários) Conteúdos.
+
+3. Classe: Conteudo
+
+    Atributos:
+
+        + int ID
+
+        + string Titulo
+
+        + string Tipo
+
+        + Criador Criador
+
+    Associação:
+
+        1 Conteúdo está associado a 1 Criador.
+
+4. Classe: Criador
+
+    Atributos:
+
+        + int ID
+
+        + string Nome
+
+        + List<Conteudo> Conteudos
+
+    Associação: 1 Criador possui uma lista de Conteúdos.
+
+5. Classe: PlaylistRepository
+
+    Classe responsável pela lógica de acesso a dados (Métodos de instância).
+
+    Métodos:
+
+        + List<Playlist> GetAllPlaylists()
+
+        + Playlist GetPlaylistByID(int id)
+
+        + void AddPlaylist(Playlist playlist)
+
+        + void UpdatePlaylist(Playlist playlist)
+
+        + void DeletePlaylist(int id)
+
+- Classe Usuário: Projetada para representar um usuário dentro da aplicação, mantendo uma lista de playlists associadas a cada usuário, facilitando a gestão personalizada de conteúdo.
+- Classe Playlist: Crucial para o gerenciamento de coleções de conteúdos, na qual cada playlist está vinculada a um usuário específico e contém uma lista dos conteúdos que ela inclui, permitindo operações como adição e remoção de conteúdos.
+- Classe Conteúdo: Associada a um criador e detalha informações sobre o conteúdo disponível para streaming, essencial para a funcionalidade de exibição e seleção de mídia.
+- Classe Criador: Agrega criadores de conteúdo, associando-os aos conteúdos que produzem, o que é vital para atribuir créditos e facilitar buscas específicas por criador.
+- Classe PlaylistRepository: Desempenha um papel fundamental ao gerenciar as operações CRUD (criação, leitura, atualização e exclusão) para playlists, atuando como uma ponte entre a interface do usuário e o banco de dados, garantindo que as interações sejam realizadas de forma eficaz e segura.
+
+----------------------------------------------------------------------
+2.4 ATIVIDADES A SEREM DESENVOLVIDAS E O RELACIONAMENTO COM AS DISCIPLINAS
+----------------------------------------------------------------------
+O aluno ou grupo do PIM deverá contemplar os seguintes itens e relacionamento com as disciplinas:
+
+A) Disciplina: Programação Orientada a Objetos II
+Atividades:
+- Codificar as classes de entidades, conforme definidas no diagrama de classes.
+- Implementar a lógica dos métodos da classe PlaylistRepository, para realizar o acesso ao banco de dados.
+- Elaborar o protótipo de interface gráfica utilizando .NET MAUI. Esse protótipo deve ser focado nos criadores de conteúdo, oferecendo funcionalidades como upload de conteúdo, gestão de playlists e análise de métricas. Você deve incluir capturas de tela de suas interfaces gráficas, obtidas diretamente do ambiente Windows.
+
+B) Disciplina: Desenvolvimento de Software para a Internet
+Atividades:
+- Desenvolver a Web API em C# usando ASP.NET Core. Essa API deve oferecer ao usuário as funcionalidades CRUD para os dados relacionados no segmento do banco de dados sob seus cuidados. Documente a API e inclua capturas de tela da interface de documentação (com o Swagger).
+
+C) Disciplina: Tópicos Especiais de Programação Orientada a Objetos
+Atividades:
+- Desenvolver um aplicativo para mobile usando Java, focado no usuário final, que deverá permitir a navegação, o consumo de conteúdo e a interação com outros usuários da plataforma. Você deve incluir capturas de tela de suas interfaces gráficas no celular ou nos emuladores de dispositivo disponíveis para Android Studio.

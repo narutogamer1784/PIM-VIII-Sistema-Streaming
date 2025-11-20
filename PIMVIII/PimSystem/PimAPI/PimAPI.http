@@ -1,0 +1,6 @@
+@PimAPI_HostAddress = http://localhost:5207
+
+GET {{PimAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
