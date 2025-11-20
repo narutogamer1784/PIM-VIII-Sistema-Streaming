@@ -1,11 +1,10 @@
-// Represents the 'Usuario' entity from the class diagram.
 using System.ComponentModel.DataAnnotations;
 
 namespace MyPIMApi.Models
 {
     public class User
     {
-        [Key] // Primary Key
+        [Key] 
         public int ID { get; set; }
 
         [Required]
@@ -16,7 +15,6 @@ namespace MyPIMApi.Models
         [MaxLength(150)]
         public string Email { get; set; }
 
-        // Navigation property: One User can have many Playlists
         public List<Playlist> Playlists { get; set; } = new List<Playlist>();
     }
 }

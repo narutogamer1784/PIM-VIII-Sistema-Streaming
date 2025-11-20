@@ -16,11 +16,9 @@ namespace MyPIMApi.Controllers
             _context = context;
         }
 
-        // POST: api/Contents/addToPlaylist
         [HttpPost("addToPlaylist")]
         public async Task<IActionResult> AddContentToPlaylist([FromBody] ContentUploadDto dto)
         {
-            // 1. Garante que existe um Criador no banco (Regra do PIM)
             var criador = await _context.Creators.FirstOrDefaultAsync();
             if (criador == null)
             {
@@ -29,7 +27,6 @@ namespace MyPIMApi.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            // 2. Cria o Conteúdo (Música/Vídeo)
             var novoConteudo = new Content
             {
                 Title = dto.Title,
@@ -40,7 +37,6 @@ namespace MyPIMApi.Controllers
             _context.Contents.Add(novoConteudo);
             await _context.SaveChangesAsync();
 
-            // 3. Cria o Link na Tabela Associativa (ItemPlaylist)
             var link = new PlaylistItem
             {
                 PlaylistID = dto.PlaylistID,
@@ -54,7 +50,6 @@ namespace MyPIMApi.Controllers
         }
     }
 
-    // --- A CLASSE DTO FICA AQUI FORA ---
     public class ContentUploadDto
     {
         public string Title { get; set; }

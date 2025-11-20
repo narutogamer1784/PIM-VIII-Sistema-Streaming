@@ -39,7 +39,7 @@ public partial class AddContentPage : ContentPage
                 if (response.IsSuccessStatusCode)
                 {
                     await DisplayAlert("Sucesso", "Conteúdo adicionado na playlist!", "Show");
-                    await Navigation.PopAsync(); // Volta pra Dashboard
+                    await Navigation.PopAsync(); 
                 }
                 else 
                 {

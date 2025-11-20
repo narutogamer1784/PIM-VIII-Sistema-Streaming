@@ -14,10 +14,8 @@ namespace MyPIMApi.Models
 
         public string? Description { get; set; }
         
-        // Foreign Key
         public int UserID { get; set; }
 
-        // Navigation property
         [ForeignKey(nameof(UserID))]
         public User? User { get; set; } 
 
